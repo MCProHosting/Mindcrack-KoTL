@@ -1,0 +1,25 @@
+spawns:
+  spawn1:
+    x: 0
+    y: 0
+    z: 0
+    pitch: -180
+    yaw: 0
+  spawn2:
+    x: 0
+    y: 0
+    z: 0
+    pitch: -180
+    yaw: 0
+  spawn3:
+    x: 0
+    y: 0
+    z: 0
+    pitch: -180
+    yaw: 0
+  spawn4:
+    x: 0
+    y: 0
+    z: 0
+    pitch: -180
+    yaw: 0
