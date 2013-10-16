@@ -9,6 +9,7 @@ import com.mcprohosting.plugins.mindcrack.kotl.listeners.Player;
 public class KotL extends JavaPlugin {
 	private static Plugin plugin;
 	private static Ladder ladder;
+	private static Leaderboard leaderboard;
 
 	public void onEnable() {
 		plugin = this;
@@ -17,6 +18,9 @@ public class KotL extends JavaPlugin {
 		SpawnHandler.setupSpawnsFromConfiguration();
 		
 		getServer().getPluginManager().registerEvents(new Player(), this);
+
+		leaderboard = new Leaderboard();
+		leaderboard.addPlayers();
 
 		getLogger().info("Initialized");
 	}
@@ -41,5 +45,9 @@ public class KotL extends JavaPlugin {
 
 	public static Ladder getLadder() {
 		return ladder;
+	}
+
+	public static Leaderboard getLeaderboard() {
+		return leaderboard;
 	}
 }
