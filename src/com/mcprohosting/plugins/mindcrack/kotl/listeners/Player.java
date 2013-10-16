@@ -1,5 +1,6 @@
 package com.mcprohosting.plugins.mindcrack.kotl.listeners;
 
+import com.mcprohosting.plugins.mindcrack.kotl.KotL;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
@@ -39,6 +40,8 @@ public class Player implements Listener {
 		inventory.setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
 		inventory.setLeggings(new ItemStack(Material.IRON_LEGGINGS));
 		inventory.setBoots(new ItemStack(Material.IRON_BOOTS));
+
+		KotL.getLeaderboard().addPlayer(event.getPlayer());
 	}
 	
 	@EventHandler
