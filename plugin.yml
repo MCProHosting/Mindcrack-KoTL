@@ -3,16 +3,20 @@ version: 0.1
 description: King of the Ladder for the Mindcrack Marathon/
 author: Matthew Salsamendi
 
-main: com.mcprohosting.plugins.kotl.KotL
+main: com.mcprohosting.plugins.mindcrack.kotl.KotL
 database: false
 
 commands:
    kotl:
      description: Managment commands for KotL
      permission: kotl
-     usage: Syntax error! Type /imraising help for command reference.
+     usage: /<command>
 permissions:
    kotl.*:
      description: Gives access to all KotL commands
      children:
        kotl.reset: true
+       kotl.changeblocks: true
+   kotl.changeblocks:
+     description: Allow player to break and place blocks
+     default: op

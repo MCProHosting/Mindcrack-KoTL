@@ -4,12 +4,19 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.mcprohosting.plugins.mindcrack.kotl.listeners.Player;
+
 public class KotL extends JavaPlugin {
 	private static Plugin plugin;
 	private static Ladder ladder;
 
 	public void onEnable() {
 		plugin = this;
+		saveDefaultConfig();
+		
+		SpawnHandler.setupSpawnsFromConfiguration();
+		
+		getServer().getPluginManager().registerEvents(new Player(), this);
 
 		getLogger().info("Initialized");
 	}
@@ -28,7 +35,7 @@ public class KotL extends JavaPlugin {
 		getLogger().info("Disabled");
 	}
 
-	public Plugin getPlugin() {
+	public static Plugin getPlugin() {
 		return plugin;
 	}
 
