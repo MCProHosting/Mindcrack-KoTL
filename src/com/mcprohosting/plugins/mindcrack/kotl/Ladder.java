@@ -27,7 +27,7 @@ public class Ladder {
 
 		if (playersOnLadder.size() > 0) {
 			for (Player player : playersOnLadder) {
-				if (player.getLocation().getX() == x && player.getLocation().getY() == topY && player.getLocation().getZ() == z) {
+				if (player.getLocation().getBlockX() == x && player.getLocation().getBlockY() == topY && player.getLocation().getBlockZ() == z) {
 					if (kingOfTheLadder == null) {
 						kingOfTheLadder = player;
 					} else {
