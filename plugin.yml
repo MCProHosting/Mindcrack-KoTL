@@ -11,6 +11,12 @@ commands:
      description: Managment commands for KotL
      permission: kotl
      usage: /<command>
+   setspawn:
+     description: Set one of the four spawn locations for the game to the current location of the player.
+     usage: /<command> <spawn number>
+   setladder:
+     description: Set the position of the top of the ladder to the current location of the player.
+     usage: /<command>
 permissions:
    kotl.*:
      description: Gives access to all KotL commands
@@ -19,4 +25,7 @@ permissions:
        kotl.changeblocks: true
    kotl.changeblocks:
      description: Allow player to break and place blocks
+     default: op
+   kotl.configure:
+     description: Allow player to set the spawn and ladder locations
      default: op

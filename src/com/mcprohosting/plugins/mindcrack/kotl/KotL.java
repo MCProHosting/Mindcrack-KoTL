@@ -3,6 +3,8 @@ package com.mcprohosting.plugins.mindcrack.kotl;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.mcprohosting.plugins.mindcrack.kotl.commands.SetLadder;
+import com.mcprohosting.plugins.mindcrack.kotl.commands.SetSpawn;
 import com.mcprohosting.plugins.mindcrack.kotl.listeners.Player;
 
 public class KotL extends JavaPlugin {
@@ -22,6 +24,9 @@ public class KotL extends JavaPlugin {
 		
 		ladder = Ladder.fromConfig();
 		getServer().getScheduler().scheduleSyncRepeatingTask(this, new ScoreRunnable(), 20, 20);
+		
+		getCommand("setspawn").setExecutor(new SetSpawn());
+		getCommand("setladder").setExecutor(new SetLadder());
 	}
 
 	public void onDisable() {

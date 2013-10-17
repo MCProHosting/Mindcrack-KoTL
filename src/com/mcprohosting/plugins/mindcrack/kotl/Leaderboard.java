@@ -13,7 +13,10 @@ public class Leaderboard {
 	public Leaderboard() {
 		manager = Bukkit.getScoreboardManager();
 		board = manager.getMainScoreboard();
-		objective = board.registerNewObjective("Leaderboard", "dummy");
+		objective = board.getObjective("Leaderboard");
+		if (objective == null) {
+			objective = board.registerNewObjective("Leaderboard", "dummy");
+		}
 
 		objective.setDisplaySlot(DisplaySlot.PLAYER_LIST);
 		objective.setDisplayName("Leaderboard");

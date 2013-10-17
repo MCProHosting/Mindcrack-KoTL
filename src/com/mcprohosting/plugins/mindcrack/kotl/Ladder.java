@@ -1,7 +1,9 @@
 package com.mcprohosting.plugins.mindcrack.kotl;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import java.util.HashSet;
@@ -71,6 +73,19 @@ public class Ladder {
 		} else {
 			return false;
 		}
+	}
+	
+	public void setLadderLocation(Location location) {
+		x = location.getBlockX();
+		topY = location.getBlockY();
+		z = location.getBlockZ();
+		
+		ConfigurationSection section = new YamlConfiguration();
+		section.set("x", x);
+		section.set("topY", topY);
+		section.set("z", z);
+		KotL.getPlugin().getConfig().set("ladder", section);
+		KotL.getPlugin().saveConfig();
 	}
 	
 	public static Ladder fromConfig() {

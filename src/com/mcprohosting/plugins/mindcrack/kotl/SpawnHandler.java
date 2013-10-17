@@ -3,6 +3,7 @@ package com.mcprohosting.plugins.mindcrack.kotl;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -24,5 +25,24 @@ public class SpawnHandler {
 	
 	public static Location getRandomSpawnLocation() {
 		return spawns.get(random.nextInt(4));
+	}
+	
+	public static void setSpawnLocation(int spawnNumber, Location location) {
+		spawns.set(spawnNumber - 1, location);
+		
+		int x = location.getBlockX();
+		int y = location.getBlockY();
+		int z = location.getBlockZ();
+		float yaw = location.getYaw();
+		float pitch = location.getPitch();
+		
+		ConfigurationSection section = new YamlConfiguration();
+		section.set("x", x);
+		section.set("y", y);
+		section.set("z", z);
+		section.set("yaw", yaw);
+		section.set("pitch", pitch);
+		KotL.getPlugin().getConfig().set("spawns.spawn" + spawnNumber, section);
+		KotL.getPlugin().saveConfig();
 	}
 }
