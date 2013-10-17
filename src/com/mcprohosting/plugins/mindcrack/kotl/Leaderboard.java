@@ -8,46 +8,28 @@ public class Leaderboard {
 
 	ScoreboardManager manager;
 	Scoreboard board;
-	Team team;
 	Objective objective;
 
 	public Leaderboard() {
 		manager = Bukkit.getScoreboardManager();
-		board = manager.getNewScoreboard();
-		team = board.registerNewTeam("Players");
+		board = manager.getMainScoreboard();
 		objective = board.registerNewObjective("Leaderboard", "dummy");
 
-		team.setCanSeeFriendlyInvisibles(false);
-		team.setAllowFriendlyFire(false);
-
-		objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+		objective.setDisplaySlot(DisplaySlot.PLAYER_LIST);
 		objective.setDisplayName("Leaderboard");
 	}
 
 	public void addPlayer(Player player) {
-		team.addPlayer(player);
-
 		Score score = objective.getScore(player);
 		score.setScore(0);
+
 		updateScoreboard();
-	}
-
-	public void addPlayers() {
-		for (Player player : Bukkit.getOnlinePlayers()) {
-			addPlayer(player);
-
-			player.setScoreboard(board);
-		}
 	}
 
 	public void updateScoreboard() {
 		for (Player player : Bukkit.getOnlinePlayers()) {
 			player.setScoreboard(board);
 		}
-	}
-
-	public void removePlayer(Player player) {
-		team.removePlayer(player);
 	}
 
 	public void addPoint(Player player) {

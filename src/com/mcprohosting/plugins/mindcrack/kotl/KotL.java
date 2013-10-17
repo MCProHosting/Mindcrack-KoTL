@@ -19,7 +19,6 @@ public class KotL extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new Player(), this);
 
 		leaderboard = new Leaderboard();
-		leaderboard.addPlayers();
 		
 		ladder = Ladder.fromConfig();
 		getServer().getScheduler().scheduleSyncRepeatingTask(this, new ScoreRunnable(), 20, 20);
