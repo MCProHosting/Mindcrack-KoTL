@@ -21,19 +21,23 @@ public class Ladder {
 	}
 
 	public Player getPlayerAtTop() {
-		if (playersOnLadder.size() > 0) {
-			Player lastHighest = (Player) playersOnLadder.toArray()[0];
+		Player kingOfTheLadder = null;
 
+		if (playersOnLadder.size() > 0) {
 			for (Player player : playersOnLadder) {
-				if (player.getLocation().getY() > lastHighest.getLocation().getY()) {
-					lastHighest = player;
+				if (player.getLocation().getX() == x && player.getLocation().getY() == topY && player.getLocation().getZ() == z) {
+					if (kingOfTheLadder == null) {
+						kingOfTheLadder = player;
+					} else {
+						return null;
+					}
 				}
 			}
-
-			return lastHighest;
 		} else {
 			return null;
 		}
+
+		return kingOfTheLadder;
 	}
 
 	public void update() {
