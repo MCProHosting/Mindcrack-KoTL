@@ -24,7 +24,11 @@ public class SpawnHandler {
 	}
 	
 	public static Location getRandomSpawnLocation() {
-		return spawns.get(random.nextInt(4));
+		Location spawn = spawns.get(random.nextInt(4));
+		if (spawn.getBlockY() == 0) {
+			return null;
+		}
+		return spawn;
 	}
 	
 	public static void setSpawnLocation(int spawnNumber, Location location) {

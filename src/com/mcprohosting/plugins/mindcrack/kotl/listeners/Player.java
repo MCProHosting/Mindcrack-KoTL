@@ -1,6 +1,8 @@
 package com.mcprohosting.plugins.mindcrack.kotl.listeners;
 
 import com.mcprohosting.plugins.mindcrack.kotl.KotL;
+import com.mcprohosting.plugins.mindcrack.kotl.SpawnHandler;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
@@ -8,13 +10,11 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
+import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-
-import com.mcprohosting.plugins.mindcrack.kotl.SpawnHandler;
 
 public class Player implements Listener {
 	@EventHandler
@@ -31,7 +31,10 @@ public class Player implements Listener {
 	
 	@EventHandler
 	public void onJoin(PlayerJoinEvent event) {
-		event.getPlayer().teleport(SpawnHandler.getRandomSpawnLocation());
+		Location spawn = SpawnHandler.getRandomSpawnLocation();
+		if (!(spawn == null)) {
+			event.getPlayer().teleport(spawn);
+		}
 		
 		PlayerInventory inventory = event.getPlayer().getInventory();
 		inventory.clear();
