@@ -1,6 +1,5 @@
 package com.mcprohosting.plugins.mindcrack.kotl;
 
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -21,18 +20,9 @@ public class KotL extends JavaPlugin {
 
 		leaderboard = new Leaderboard();
 		leaderboard.addPlayers();
-
-		getLogger().info("Initialized");
-	}
-
-	public void startLadderUpdater() {
-		plugin.getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
-			@Override
-			public void run() {
-				Bukkit.broadcastMessage("This is a test");
-				getLadder().update();
-			}
-		}, 20, 20);
+		
+		ladder = Ladder.fromConfig();
+		getServer().getScheduler().scheduleSyncRepeatingTask(this, new ScoreRunnable(), 20, 20);
 	}
 
 	public void onDisable() {

@@ -23,3 +23,7 @@ spawns:
     z: 0
     pitch: -180
     yaw: 0
+ladder:
+  x: 0
+  z: 0
+  topY: 0

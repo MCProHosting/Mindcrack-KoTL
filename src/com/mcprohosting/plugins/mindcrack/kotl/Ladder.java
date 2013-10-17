@@ -1,6 +1,7 @@
 package com.mcprohosting.plugins.mindcrack.kotl;
 
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 
 import java.util.HashSet;
@@ -37,7 +38,7 @@ public class Ladder {
 
 	public void update() {
 		for (Player player : Bukkit.getOnlinePlayers()) {
-			if (!checkPlayerOnLadder(player)) {
+			if (checkPlayerOnLadder(player)) {
 				playersOnLadder.add(player);
 			} else {
 				playersOnLadder.remove(player);
@@ -58,14 +59,19 @@ public class Ladder {
 	}
 
 	private boolean checkPlayerOnLadder(Player player) {
-		int ladderAbsolute = this.getX()+this.getZ();
-		int playerAbsolute = (int) player.getLocation().getX() + (int) player.getLocation().getZ();
-
-		//If the player is within 4 blocks (2 in each direction) of the ladder then return true.
-		if (ladderAbsolute == playerAbsolute || (ladderAbsolute-2 > playerAbsolute && ladderAbsolute+2 < playerAbsolute)) {
+		int playerX = player.getLocation().getBlockX();
+		int playerZ = player.getLocation().getBlockZ();
+		
+		if (playerX <= x + 1 && playerX >= x - 1 && playerZ <= z + 1 && playerZ >= z - 1) {
 			return true;
 		} else {
 			return false;
 		}
+	}
+	
+	public static Ladder fromConfig() {
+		ConfigurationSection ladderConfig = KotL.getPlugin().getConfig().getConfigurationSection("ladder");
+		Ladder ladder = new Ladder(ladderConfig.getInt("x"), ladderConfig.getInt("z"), ladderConfig.getInt("topY"));
+		return ladder;
 	}
 }
