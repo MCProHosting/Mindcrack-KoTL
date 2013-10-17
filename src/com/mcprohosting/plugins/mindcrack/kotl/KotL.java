@@ -1,6 +1,5 @@
 package com.mcprohosting.plugins.mindcrack.kotl;
 
-import com.gmail.favorlock.bonesqlib.MySQL;
 import com.mcprohosting.plugins.mindcrack.kotl.commands.SetLadder;
 import com.mcprohosting.plugins.mindcrack.kotl.commands.SetSpawn;
 import com.mcprohosting.plugins.mindcrack.kotl.listeners.Player;
@@ -11,7 +10,7 @@ public class KotL extends JavaPlugin {
 	private static Plugin plugin;
 	private static Ladder ladder;
 	private static Leaderboard leaderboard;
-	private MySQL database;
+	private static Database database;
 
 	public void onEnable() {
 		plugin = this;
@@ -24,10 +23,11 @@ public class KotL extends JavaPlugin {
 
 	private void init() {
 		saveDefaultConfig();
-		SpawnHandler.setupSpawnsFromConfiguration();
 
+		SpawnHandler.setupSpawnsFromConfiguration();
 		registerListeners();
 
+		database = new Database();
 		leaderboard = new Leaderboard();
 		ladder = Ladder.fromConfig();
 		getServer().getScheduler().scheduleSyncRepeatingTask(this, new ScoreRunnable(), 20, 20);

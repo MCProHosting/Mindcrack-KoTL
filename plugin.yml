@@ -4,7 +4,8 @@ description: King of the Ladder for the Mindcrack Marathon/
 author: Matthew Salsamendi
 
 main: com.mcprohosting.plugins.mindcrack.kotl.KotL
-database: false
+database: true
+depend: [BoneSQLib]
 
 commands:
    kotl:
