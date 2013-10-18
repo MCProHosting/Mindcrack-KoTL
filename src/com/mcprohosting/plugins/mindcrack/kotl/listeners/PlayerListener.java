@@ -1,10 +1,10 @@
 package com.mcprohosting.plugins.mindcrack.kotl.listeners;
 
-import com.mcprohosting.plugins.mindcrack.kotl.database.DatabaseManager;
 import com.mcprohosting.plugins.mindcrack.kotl.KotL;
+import com.mcprohosting.plugins.mindcrack.kotl.database.DatabaseManager;
 import com.mcprohosting.plugins.mindcrack.kotl.utitilies.SpawnHandler;
-
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -15,8 +15,9 @@ import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 
-public class Player implements Listener {
+public class PlayerListener implements Listener {
 	@EventHandler
 	public void onHungerChange(FoodLevelChangeEvent event) {
 		event.setCancelled(true);
@@ -24,11 +25,24 @@ public class Player implements Listener {
 	
 	@EventHandler
 	public void onDamage(EntityDamageEvent event) {
-		if (event.getEntityType().equals(EntityType.PLAYER) && event.getCause().equals(DamageCause.FALL)) {
-			event.setCancelled(true);
+		if (event.getEntityType().equals(EntityType.PLAYER)) {
+			Player player = (Player) event.getEntity();
+
+			if (event.getCause().equals(DamageCause.FALL)) {
+				event.setCancelled(true);
+			}
+
+			if (player.getLocation().getY() < 56) {
+				event.setCancelled(true);
+			}
 		}
 	}
-	
+
+	@EventHandler
+	public void onRespawn(PlayerRespawnEvent event) {
+		SpawnHandler.randomlySpawnPlayer(event.getPlayer());
+	}
+
 	@EventHandler
 	public void onJoin(PlayerJoinEvent event) {
 		if (!DatabaseManager.containsPlayer(event.getPlayer().getName())) {

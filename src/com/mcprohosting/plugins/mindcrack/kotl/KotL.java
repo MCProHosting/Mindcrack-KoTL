@@ -3,6 +3,7 @@ package com.mcprohosting.plugins.mindcrack.kotl;
 import com.mcprohosting.plugins.mindcrack.kotl.database.Database;
 import com.mcprohosting.plugins.mindcrack.kotl.database.DatabaseManager;
 import com.mcprohosting.plugins.mindcrack.kotl.database.MySQLRunnable;
+import com.mcprohosting.plugins.mindcrack.kotl.listeners.PlayerListener;
 import com.mcprohosting.plugins.mindcrack.kotl.utitilies.LilypadMessager;
 import com.mcprohosting.plugins.mindcrack.kotl.utitilies.ScoreRunnable;
 import com.mcprohosting.plugins.mindcrack.kotl.utitilies.SpawnHandler;
@@ -12,7 +13,6 @@ import lilypad.client.connect.api.Connect;
 import com.mcprohosting.plugins.mindcrack.kotl.commands.SetLadder;
 import com.mcprohosting.plugins.mindcrack.kotl.commands.SetSpawn;
 import com.mcprohosting.plugins.mindcrack.kotl.commands.Top;
-import com.mcprohosting.plugins.mindcrack.kotl.listeners.Player;
 
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -55,7 +55,7 @@ public class KotL extends JavaPlugin {
 	}
 
 	private void registerListeners() {
-		getServer().getPluginManager().registerEvents(new Player(), this);
+		getServer().getPluginManager().registerEvents(new PlayerListener(), this);
 	}
 
 	private void registerCommands() {
