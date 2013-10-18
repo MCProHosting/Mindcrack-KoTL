@@ -3,8 +3,10 @@ package com.mcprohosting.plugins.mindcrack.kotl;
 import com.mcprohosting.plugins.mindcrack.kotl.database.Database;
 import com.mcprohosting.plugins.mindcrack.kotl.database.DatabaseManager;
 import com.mcprohosting.plugins.mindcrack.kotl.database.MySQLRunnable;
+import com.mcprohosting.plugins.mindcrack.kotl.utitilies.LilypadMessager;
 import com.mcprohosting.plugins.mindcrack.kotl.utitilies.ScoreRunnable;
 import com.mcprohosting.plugins.mindcrack.kotl.utitilies.SpawnHandler;
+
 import lilypad.client.connect.api.Connect;
 
 import com.mcprohosting.plugins.mindcrack.kotl.commands.SetLadder;
@@ -47,6 +49,7 @@ public class KotL extends JavaPlugin {
 		ladder = Ladder.fromConfig();
 		getServer().getScheduler().scheduleSyncRepeatingTask(this, new ScoreRunnable(), 20, 20);
 		getServer().getScheduler().scheduleSyncRepeatingTask(this, new MySQLRunnable(), 20, 20 * 60);
+		getServer().getScheduler().scheduleSyncRepeatingTask(this, new LilypadMessager(), 20, 20);
 
 		registerCommands();
 	}

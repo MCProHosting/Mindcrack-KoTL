@@ -1,10 +1,15 @@
 package com.mcprohosting.plugins.mindcrack.kotl.utitilies;
 
 import com.mcprohosting.plugins.mindcrack.kotl.KotL;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -24,12 +29,28 @@ public class SpawnHandler {
 		}
 	}
 	
-	public static Location getRandomSpawnLocation() {
+	private static Location getRandomSpawnLocation() {
 		Location spawn = spawns.get(random.nextInt(4));
 		if (spawn.getBlockY() == 0) {
 			return null;
 		}
 		return spawn;
+	}
+	
+	public static void randomlySpawnPlayer(Player player) {
+		Location location = getRandomSpawnLocation();
+		
+		if (location != null) {
+			PlayerInventory inventory = player.getInventory();
+			inventory.clear();
+			inventory.addItem(new ItemStack(Material.STONE_SWORD));
+			inventory.setHelmet(new ItemStack(Material.IRON_HELMET));
+			inventory.setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
+			inventory.setLeggings(new ItemStack(Material.IRON_LEGGINGS));
+			inventory.setBoots(new ItemStack(Material.IRON_BOOTS));
+			
+			player.teleport(location);
+		}
 	}
 	
 	public static void setSpawnLocation(int spawnNumber, Location location) {

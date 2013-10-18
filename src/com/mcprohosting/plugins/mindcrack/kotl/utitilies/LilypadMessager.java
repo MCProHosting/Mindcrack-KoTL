@@ -9,8 +9,10 @@ import lilypad.client.connect.api.result.FutureResult;
 import lilypad.client.connect.api.result.StatusCode;
 import lilypad.client.connect.api.result.impl.MessageResult;
 
-public class LilypadMessager {
-	public static void sendPlayerCount() {
+public class LilypadMessager implements Runnable {
+	
+	@Override
+	public void run() {
 		Connect connect = KotL.getConnect();
 		try {
 			String playerCount = Bukkit.getOnlinePlayers().length + "/" + Bukkit.getMaxPlayers();
