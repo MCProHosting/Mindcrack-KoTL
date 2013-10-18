@@ -34,6 +34,7 @@ public class KotL extends JavaPlugin {
 		leaderboard = new Leaderboard();
 		ladder = Ladder.fromConfig();
 		getServer().getScheduler().scheduleSyncRepeatingTask(this, new ScoreRunnable(), 20, 20);
+		getServer().getScheduler().scheduleSyncRepeatingTask(this, new MySQLRunnable(), 20, 20 * 60);
 
 		registerCommands();
 	}

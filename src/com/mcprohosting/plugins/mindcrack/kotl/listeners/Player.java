@@ -14,6 +14,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
@@ -50,6 +51,11 @@ public class Player implements Listener {
 		inventory.setBoots(new ItemStack(Material.IRON_BOOTS));
 
 		KotL.getLeaderboard().addPlayer(event.getPlayer());
+	}
+
+	@EventHandler
+	public void onQuit(PlayerQuitEvent event) {
+		KotL.getLeaderboard().removePlayer(event.getPlayer().getName());
 	}
 	
 	@EventHandler
