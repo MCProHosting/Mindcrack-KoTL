@@ -18,6 +18,9 @@ commands:
    setladder:
      description: Set the position of the top of the ladder to the current location of the player.
      usage: /<command>
+   top:
+     descriptions: Find out who the top player is on the server.
+     usage: /<command>
 permissions:
    kotl.*:
      description: Gives access to all KotL commands

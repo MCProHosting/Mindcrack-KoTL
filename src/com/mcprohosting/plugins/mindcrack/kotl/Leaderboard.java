@@ -12,7 +12,9 @@ public class Leaderboard {
 	ScoreboardManager manager;
 	Scoreboard board;
 	Objective objective;
-	Map<String, Integer> points;
+	Map<String, Participant> participants;
+	String top;
+	int topScore;
 
 	public Leaderboard() {
 		manager = Bukkit.getScoreboardManager();
@@ -24,23 +26,25 @@ public class Leaderboard {
 
 		objective.setDisplaySlot(DisplaySlot.PLAYER_LIST);
 		objective.setDisplayName("Leaderboard");
-		points = new HashMap<String, Integer>();
+		participants = new HashMap<String, Participant>();
+		top = null;
+		topScore = 0;
 	}
 
 	public void addPlayer(Player player) {
 		Score score = objective.getScore(player);
 		score.setScore(0);
 
-		if (!points.containsKey(player.getName().toLowerCase())) {
-			points.put(player.getName().toLowerCase(), 0);
+		if (!participants.containsKey(player.getName().toLowerCase())) {
+			participants.put(player.getName().toLowerCase(), new Participant(player));
 		}
 
 		updateScoreboard();
 	}
 
 	public void removePlayer(String player) {
-		if (points.containsKey(player.toLowerCase())) {
-			points.remove(player);
+		if (participants.containsKey(player.toLowerCase())) {
+			participants.remove(player);
 		}
 	}
 
@@ -50,30 +54,77 @@ public class Leaderboard {
 		}
 	}
 
-	public void addPoint(Player player) {
+	public void addPoint(Player player, int point) {
 		Score score = objective.getScore(player);
 		int currentScore = score.getScore();
 
 		score.setScore(currentScore + 1);
 
-		if (points.containsKey(player.getName().toLowerCase())) {
-			int tempPoints = points.get(player.getName().toLowerCase()).intValue();
-			points.put(player.getName().toLowerCase(), tempPoints + 1);
+		if (participants.containsKey(player.getName().toLowerCase())) {
+			Participant participant = participants.get(player.getName().toLowerCase());
+			int tempPoints = participant.getUpdateScore();
+			participant.setUpdateScore(tempPoints + point);
+
+			if (point == 1) {
+				int totalPoints = participant.getTotalScore();
+				participant.setTotalScore(totalPoints + point);
+				participant.updateTimeStreak();
+				participant.calculateStreakPoints();
+				isTop(player.getName());
+			}
 		}
 	}
 
-	public int getTempPoints (String name) {
-		if (points.containsKey(name.toLowerCase())) {
-			return points.get(name.toLowerCase());
+	public int getGlobalPoints (String name) {
+		if (participants.containsKey(name.toLowerCase())) {
+			Participant participant = participants.get(name.toLowerCase());
+			return participant.getUpdateScore();
 		}
 
 		return 0;
 	}
 
 	public void resetTempPoints(String name) {
-		if (points.containsKey(name.toLowerCase())) {
-			points.put(name.toLowerCase(), 0);
+		if (participants.containsKey(name.toLowerCase())) {
+			Participant participant = participants.get(name.toLowerCase());
+			participant.setUpdateScore(0);
 		}
+	}
+
+	public void isTop(String name) {
+		if (!(top == null)) {
+			if (top == name) {
+				topScore = participants.get(top.toLowerCase()).getTotalScore();
+				return;
+			}
+
+			int topScore = participants.get(top.toLowerCase()).getTotalScore();
+			int challengerScore = participants.get(name.toLowerCase()).getTotalScore();
+			KotL.getPlugin().getLogger().info("Score: " + topScore);
+
+			if (challengerScore > topScore) {
+				top = name;
+				this.topScore = challengerScore;
+			}
+		} else {
+			top = name;
+			topScore = participants.get(top.toLowerCase()).getTotalScore();
+		}
+	}
+
+	public String getTop() {
+		return top;
+	}
+
+	public int getTopScore() {
+		return topScore;
+	}
+
+	public Participant getParticipant(String name) {
+		if (participants.containsKey(name.toLowerCase())) {
+			return participants.get(name);
+		}
+		return null;
 	}
 
 }

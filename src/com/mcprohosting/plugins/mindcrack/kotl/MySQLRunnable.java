@@ -8,7 +8,7 @@ public class MySQLRunnable implements Runnable {
 	@Override
 	public void run() {
 		for (Player player : Bukkit.getOnlinePlayers()) {
-			int points = KotL.getLeaderboard().getTempPoints(player.getName());
+			int points = KotL.getLeaderboard().getGlobalPoints(player.getName());
 			if (points > 0) {
 				DatabaseManager.addPoints(player.getName(), points);
 				KotL.getLeaderboard().resetTempPoints(player.getName());
