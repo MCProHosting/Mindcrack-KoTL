@@ -60,6 +60,8 @@ public class Player implements Listener {
 	@EventHandler
 	public void onQuit(PlayerQuitEvent event) {
 		KotL.getLeaderboard().removePlayer(event.getPlayer().getName());
+		
+		LilypadMessager.sendPlayerCount();
 	}
 	
 	@EventHandler
