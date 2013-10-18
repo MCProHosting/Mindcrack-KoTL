@@ -24,11 +24,15 @@ public class Leaderboard {
 			objective = board.registerNewObjective("Leaderboard", "dummy");
 		}
 
-		objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+		objective.setDisplaySlot(DisplaySlot.PLAYER_LIST);
 		objective.setDisplayName("Leaderboard");
 		participants = new HashMap<String, Participant>();
 		top = null;
 		topScore = 0;
+	}
+	
+	public Objective createObjective() {
+		Objective objective = board.getObjective(arg0)
 	}
 
 	public void addPlayer(Player player) {
