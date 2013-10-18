@@ -21,8 +21,9 @@ public class Participant {
 
 	public void calculateStreakPoints() {
 		if (timeStreak == next) {
-			KotL.getPlugin().getLogger().info("Give player 15 points!");
-			KotL.getLeaderboard().addPoint(Bukkit.getPlayer(name), 15);
+			Player player = Bukkit.getPlayer(name);
+			player.sendMessage("You have been awarded 15 points for holding King of the Ladder for 60 seconds!");
+			KotL.getLeaderboard().addPoint(player, 15);
 			next = next + 1;
 		}
 	}
