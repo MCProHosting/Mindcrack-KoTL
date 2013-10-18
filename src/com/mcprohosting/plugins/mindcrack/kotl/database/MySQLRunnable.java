@@ -1,5 +1,6 @@
-package com.mcprohosting.plugins.mindcrack.kotl;
+package com.mcprohosting.plugins.mindcrack.kotl.database;
 
+import com.mcprohosting.plugins.mindcrack.kotl.KotL;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 

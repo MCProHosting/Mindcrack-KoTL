@@ -1,6 +1,6 @@
 package com.mcprohosting.plugins.mindcrack.kotl.listeners;
 
-import com.mcprohosting.plugins.mindcrack.kotl.Helpers;
+import com.mcprohosting.plugins.mindcrack.kotl.utitilies.Helpers;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

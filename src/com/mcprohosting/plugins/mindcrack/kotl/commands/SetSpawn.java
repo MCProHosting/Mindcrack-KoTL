@@ -6,7 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.mcprohosting.plugins.mindcrack.kotl.SpawnHandler;
+import com.mcprohosting.plugins.mindcrack.kotl.utitilies.SpawnHandler;
 
 public class SetSpawn implements CommandExecutor {
 

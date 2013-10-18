@@ -1,4 +1,4 @@
-package com.mcprohosting.plugins.mindcrack.kotl;
+package com.mcprohosting.plugins.mindcrack.kotl.utitilies;
 
 import org.bukkit.event.player.PlayerMoveEvent;
 

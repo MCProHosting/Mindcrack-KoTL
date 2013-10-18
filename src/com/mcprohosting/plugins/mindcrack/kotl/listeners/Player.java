@@ -1,9 +1,9 @@
 package com.mcprohosting.plugins.mindcrack.kotl.listeners;
 
-import com.mcprohosting.plugins.mindcrack.kotl.DatabaseManager;
+import com.mcprohosting.plugins.mindcrack.kotl.database.DatabaseManager;
 import com.mcprohosting.plugins.mindcrack.kotl.KotL;
-import com.mcprohosting.plugins.mindcrack.kotl.LilypadMessager;
-import com.mcprohosting.plugins.mindcrack.kotl.SpawnHandler;
+import com.mcprohosting.plugins.mindcrack.kotl.utitilies.LilypadMessager;
+import com.mcprohosting.plugins.mindcrack.kotl.utitilies.SpawnHandler;
 
 import org.bukkit.Location;
 import org.bukkit.Material;

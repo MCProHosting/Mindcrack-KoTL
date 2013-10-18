@@ -1,5 +1,7 @@
-package com.mcprohosting.plugins.mindcrack.kotl;
+package com.mcprohosting.plugins.mindcrack.kotl.utitilies;
 
+import com.mcprohosting.plugins.mindcrack.kotl.KotL;
+import com.mcprohosting.plugins.mindcrack.kotl.Ladder;
 import org.bukkit.entity.Player;
 
 public class ScoreRunnable implements Runnable {

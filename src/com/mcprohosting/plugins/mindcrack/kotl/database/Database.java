@@ -1,6 +1,7 @@
-package com.mcprohosting.plugins.mindcrack.kotl;
+package com.mcprohosting.plugins.mindcrack.kotl.database;
 
 import com.gmail.favorlock.bonesqlib.MySQL;
+import com.mcprohosting.plugins.mindcrack.kotl.KotL;
 import org.bukkit.configuration.ConfigurationSection;
 
 import java.sql.SQLException;
