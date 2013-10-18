@@ -24,7 +24,7 @@ public class Leaderboard {
 			objective = board.registerNewObjective("Leaderboard", "dummy");
 		}
 
-		objective.setDisplaySlot(DisplaySlot.PLAYER_LIST);
+		objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 		objective.setDisplayName("Leaderboard");
 		participants = new HashMap<String, Participant>();
 		top = null;
