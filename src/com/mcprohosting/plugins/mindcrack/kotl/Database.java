@@ -3,9 +3,11 @@ package com.mcprohosting.plugins.mindcrack.kotl;
 import com.gmail.favorlock.bonesqlib.MySQL;
 import org.bukkit.configuration.ConfigurationSection;
 
+import java.sql.SQLException;
+
 public class Database {
 
-	private static MySQL mysql;
+	public static MySQL mysql;
 	private String host;
 	private int port;
 	private String database;
@@ -38,6 +40,36 @@ public class Database {
 			username = databaseConfig.getString("username");
 			password = databaseConfig.getString("password");
 		}
+	}
+
+	public static boolean isDBSchemaValid() {
+		boolean retVal = false;
+
+		retVal = mysql.isTable("players");
+
+		return retVal;
+	}
+
+	public static boolean setupTables() {
+		boolean retVal = false;
+
+		try {
+			if (!mysql.isTable("players")) {
+				mysql.query("CREATE TABLE IF NOT EXISTS players (player VARCHAR(16) PRIMARY KEY, global Integer);");
+				retVal = true;
+			}
+		} catch (SQLException e) {
+			try {
+				if (mysql.isTable("players")) {
+					mysql.query("DROP TABLE players;");
+				}
+			} catch(SQLException ex) {
+				KotL.getPlugin().getLogger().severe("Error dropping tables!");
+				retVal = false;
+			}
+		}
+
+		return retVal;
 	}
 
 }

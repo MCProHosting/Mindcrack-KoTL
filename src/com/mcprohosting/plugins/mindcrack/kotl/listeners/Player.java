@@ -1,5 +1,6 @@
 package com.mcprohosting.plugins.mindcrack.kotl.listeners;
 
+import com.mcprohosting.plugins.mindcrack.kotl.DatabaseManager;
 import com.mcprohosting.plugins.mindcrack.kotl.KotL;
 import com.mcprohosting.plugins.mindcrack.kotl.SpawnHandler;
 import org.bukkit.Location;
@@ -31,6 +32,10 @@ public class Player implements Listener {
 	
 	@EventHandler
 	public void onJoin(PlayerJoinEvent event) {
+		if (!DatabaseManager.containsPlayer(event.getPlayer().getName())) {
+			DatabaseManager.addPlayer(event.getPlayer().getName());
+		}
+
 		Location spawn = SpawnHandler.getRandomSpawnLocation();
 		if (!(spawn == null)) {
 			event.getPlayer().teleport(spawn);

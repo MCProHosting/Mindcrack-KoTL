@@ -11,6 +11,7 @@ public class KotL extends JavaPlugin {
 	private static Ladder ladder;
 	private static Leaderboard leaderboard;
 	private static Database database;
+	private static DatabaseManager databaseManager;
 
 	public void onEnable() {
 		plugin = this;
@@ -28,6 +29,8 @@ public class KotL extends JavaPlugin {
 		registerListeners();
 
 		database = new Database();
+		databaseManager = new DatabaseManager();
+		databaseManager.init();
 		leaderboard = new Leaderboard();
 		ladder = Ladder.fromConfig();
 		getServer().getScheduler().scheduleSyncRepeatingTask(this, new ScoreRunnable(), 20, 20);
@@ -54,5 +57,9 @@ public class KotL extends JavaPlugin {
 
 	public static Leaderboard getLeaderboard() {
 		return leaderboard;
+	}
+
+	public static Database getDB() {
+		return database;
 	}
 }
