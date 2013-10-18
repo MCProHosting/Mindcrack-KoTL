@@ -30,10 +30,6 @@ public class Leaderboard {
 		top = null;
 		topScore = 0;
 	}
-	
-	public Objective createObjective() {
-		Objective objective = board.getObjective(arg0)
-	}
 
 	public void addPlayer(Player player) {
 		Score score = objective.getScore(player);
