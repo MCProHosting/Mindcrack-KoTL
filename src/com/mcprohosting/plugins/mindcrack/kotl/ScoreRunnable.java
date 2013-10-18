@@ -7,7 +7,6 @@ public class ScoreRunnable implements Runnable {
 	@Override
 	public void run() {
 		Ladder ladder = KotL.getLadder();
-		ladder.update();
 		Player player = ladder.getPlayerAtTop();
 		if (player != null) {
 			KotL.getLeaderboard().addPoint(player, 1);

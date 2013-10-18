@@ -6,27 +6,23 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
-import java.util.HashSet;
-
 public class Ladder {
 	int x;
 	int z;
 	int topY;
 	Player playerAtTop;
-	HashSet<Player> playersOnLadder;
 
 	public Ladder(int x, int z, int topY) {
 		this.x = x;
 		this.z = z;
 		this.topY = topY;
-		playersOnLadder = new HashSet<Player>();
 	}
 
 	public Player getPlayerAtTop() {
 		Player kingOfTheLadder = null;
 
-		if (playersOnLadder.size() > 0) {
-			for (Player player : playersOnLadder) {
+		if (Bukkit.getOnlinePlayers().length > 0) {
+			for (Player player : Bukkit.getOnlinePlayers()) {
 				int playerX = player.getLocation().getBlockX();
 				int playerZ = player.getLocation().getBlockZ();
 				
@@ -45,16 +41,6 @@ public class Ladder {
 		return kingOfTheLadder;
 	}
 
-	public void update() {
-		for (Player player : Bukkit.getOnlinePlayers()) {
-			if (checkPlayerOnLadder(player)) {
-				playersOnLadder.add(player);
-			} else {
-				playersOnLadder.remove(player);
-			}
-		}
-	}
-
 	public int getX() {
 		return x;
 	}
@@ -65,17 +51,6 @@ public class Ladder {
 
 	public int getTopY() {
 		return topY;
-	}
-
-	private boolean checkPlayerOnLadder(Player player) {
-		int playerX = player.getLocation().getBlockX();
-		int playerZ = player.getLocation().getBlockZ();
-		
-		if (playerX <= x + 1 && playerX >= x - 1 && playerZ <= z + 1 && playerZ >= z - 1) {
-			return true;
-		} else {
-			return false;
-		}
 	}
 	
 	public void setLadderLocation(Location location) {
