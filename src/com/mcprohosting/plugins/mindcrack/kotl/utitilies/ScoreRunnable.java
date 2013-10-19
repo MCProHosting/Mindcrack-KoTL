@@ -1,12 +1,11 @@
 package com.mcprohosting.plugins.mindcrack.kotl.utitilies;
 
-import java.util.Date;
-
 import com.mcprohosting.plugins.mindcrack.kotl.KotL;
 import com.mcprohosting.plugins.mindcrack.kotl.Ladder;
-
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+
+import java.util.Date;
 
 public class ScoreRunnable implements Runnable {
 	private Player previousKing = null;
@@ -34,14 +33,15 @@ public class ScoreRunnable implements Runnable {
 			Ladder ladder = KotL.getLadder();
 			Player player = ladder.getPlayerAtTop();
 			
-			if (player == null && previousKing != null) {
-				previousKing.sendMessage("You are no longer King of the Ladder!");
-				previousKing = null;
-			} else if (player != null && !previousKing.equals(player)) {
-				player.sendMessage("You are now King of the Ladder!");
-				previousKing = player;
+			//if (player == null && previousKing != null) {
+			//	previousKing.sendMessage("You are no longer King of the Ladder!");
+			//	previousKing = null;
+			//}
+			//if (player != null && previousKing == null) {
+			//	player.sendMessage("You are now King of the Ladder!");
+			//	previousKing = player;
 				KotL.getLeaderboard().addPoint(player, 1);
-			}
+			//}
 		}
 	}
 }
