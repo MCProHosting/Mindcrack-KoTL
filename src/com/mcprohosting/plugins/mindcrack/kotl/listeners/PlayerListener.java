@@ -2,6 +2,7 @@ package com.mcprohosting.plugins.mindcrack.kotl.listeners;
 
 import com.mcprohosting.plugins.mindcrack.kotl.KotL;
 import com.mcprohosting.plugins.mindcrack.kotl.database.DatabaseManager;
+import com.mcprohosting.plugins.mindcrack.kotl.utitilies.Helpers;
 import com.mcprohosting.plugins.mindcrack.kotl.utitilies.SpawnHandler;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -10,7 +11,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -29,10 +29,6 @@ public class PlayerListener implements Listener {
 		if (event.getEntityType().equals(EntityType.PLAYER)) {
 			Player player = (Player) event.getEntity();
 
-			if (event.getCause().equals(DamageCause.FALL)) {
-				event.setCancelled(true);
-			}
-
 			if (player.getLocation().getY() < 85) {
 				event.setCancelled(true);
 			}
@@ -42,6 +38,9 @@ public class PlayerListener implements Listener {
 	@EventHandler
 	public void onDeath(PlayerDeathEvent event) {
 		event.getDrops().clear();
+		if (!event.getEntity().hasPermission("kotl.mindcrack")) {
+			Helpers.redirectToServer("1-kotl-lobby", event.getEntity());
+		}
 	}
 
 	@EventHandler

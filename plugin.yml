@@ -33,3 +33,6 @@ permissions:
    kotl.configure:
      description: Allow player to set the spawn and ladder locations
      default: op
+   kotl.mindcrack:
+     description: Allow player to stay in game if they day
+     default: op
