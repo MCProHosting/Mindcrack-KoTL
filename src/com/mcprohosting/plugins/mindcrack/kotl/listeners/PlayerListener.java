@@ -33,7 +33,7 @@ public class PlayerListener implements Listener {
 				event.setCancelled(true);
 			}
 
-			if (player.getLocation().getY() < 56) {
+			if (player.getLocation().getY() < 65) {
 				event.setCancelled(true);
 			}
 		}
