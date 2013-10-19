@@ -29,8 +29,10 @@ public class PlayerListener implements Listener {
 		if (event.getEntityType().equals(EntityType.PLAYER)) {
 			Player player = (Player) event.getEntity();
 
-			if (player.getLocation().getY() < 85) {
-				event.setCancelled(true);
+			if (!event.getCause().equals(EntityDamageEvent.DamageCause.FALL)) {
+				if (player.getLocation().getY() < 85) {
+					event.setCancelled(true);
+				}
 			}
 		}
 	}
@@ -38,7 +40,7 @@ public class PlayerListener implements Listener {
 	@EventHandler
 	public void onDeath(PlayerDeathEvent event) {
 		event.getDrops().clear();
-		if (!event.getEntity().hasPermission("kotl.mindcrack")) {
+		if (!event.getEntity().hasPermission("mindcrack.kotl.bypass")) {
 			Helpers.redirectToServer("1-kotl-lobby", event.getEntity());
 		}
 	}
