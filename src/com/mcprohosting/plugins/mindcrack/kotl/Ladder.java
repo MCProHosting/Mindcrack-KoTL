@@ -10,12 +10,14 @@ public class Ladder {
 	int x;
 	int z;
 	int topY;
+	int centerY;
 	Player playerAtTop;
 
 	public Ladder(int x, int z, int topY) {
 		this.x = x;
 		this.z = z;
 		this.topY = topY;
+		this.centerY = 62 + ((topY - 62) / 2);
 	}
 
 	public Player getPlayerAtTop() {
@@ -51,6 +53,10 @@ public class Ladder {
 
 	public int getTopY() {
 		return topY;
+	}
+
+	public int getCenterY() {
+		return centerY;
 	}
 	
 	public void setLadderLocation(Location location) {

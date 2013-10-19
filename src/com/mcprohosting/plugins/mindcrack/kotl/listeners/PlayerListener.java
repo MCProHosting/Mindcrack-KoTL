@@ -83,5 +83,8 @@ public class PlayerListener implements Listener {
 		if (event.getTo().getY() < 0) {
 			SpawnHandler.randomlySpawnPlayer(event.getPlayer());
 		}
+		if (event.getTo().getBlockY() == KotL.getLadder().getCenterY() && event.getFrom().getBlockY() < event.getTo().getBlockY()) {
+			event.getPlayer().sendMessage("You are half way to the top of the ladder!");
+		}
 	}
 }
